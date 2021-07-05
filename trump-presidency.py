@@ -170,6 +170,7 @@ fakenews_damage = 2
 foxnews_add = 1
 
 
+
 #-------Chapter 4 Parameters-------#
 
 senator_width = 80
@@ -195,6 +196,27 @@ term_limit = 4
 term_speed = 0.5
 
 
+#-------Functions to help loading-------#
+def load_and_scale(directory, w, h):
+    image = pygame.image.load(directory)
+    image.convert_alpha()
+    image = pygame.transform.smoothscale(image, (w,h))
+    return image
+
+def load_scale_pos_center(directory, w, h, x, y):
+    image = pygame.image.load(directory)
+    image.convert_alpha()
+    image = pygame.transform.smoothscale(image, (w, h))
+    image_position = image.get_rect()
+    image_position.center = x, y
+    return(image, image_position)
+
+def load_scale_getpos(directory, w, h):
+    image = pygame.image.load(directory)
+    image.convert_alpha()
+    image = pygame.transform.smoothscale(image, (w, h))
+    image_position = image.get_rect()
+    return(image, image_position)
 
 #-------Audio Files-------#
 crooked_audio = pygame.mixer.Sound('assets/chapter1_media_war/crooked.wav')
@@ -402,129 +424,44 @@ chapter1.convert_alpha()
 chapter1_position = chapter1.get_rect()
 chapter1_position.center = screen_width/2, screen_height/2
 
-chapter2_1 = pygame.image.load('assets/game_assets/chapter2_1.png')
-chapter2_1.convert_alpha()
-chapter2_1 = pygame.transform.smoothscale(chapter2_1,(screen_width,screen_height))
-chapter2_1_position = chapter2_1.get_rect()
-chapter2_1_position.center = screen_width/2, screen_height/2
+chapter2_1, chapter2_1_position = load_scale_pos_center('assets/game_assets/chapter2_1.png', screen_width, screen_height, screen_width/2, screen_height/2)
+chapter2_2, chapter2_2_position = load_scale_pos_center('assets/game_assets/chapter2_2.png', screen_width, screen_height, screen_width/2, screen_height/2)
+chapter2_3, chapter2_3_position = load_scale_pos_center('assets/game_assets/chapter2_3.png', screen_width-80, screen_height, screen_width/2, screen_height/2)
+chapter2_4, chapter2_4_position = load_scale_pos_center('assets/game_assets/chapter2_4.png', screen_width, screen_height, screen_width/2, screen_height/2)
 
-chapter2_2 = pygame.image.load('assets/game_assets/chapter2_2.png')
-chapter2_2.convert_alpha()
-chapter2_2 = pygame.transform.smoothscale(chapter2_2,(screen_width,screen_height))
-chapter2_2_position = chapter2_2.get_rect()
-chapter2_2_position.center = screen_width/2, screen_height/2
-
-chapter2_3 = pygame.image.load('assets/game_assets/chapter2_3.png')
-chapter2_3.convert_alpha()
-chapter2_3 = pygame.transform.smoothscale(chapter2_3,(screen_width-80,screen_height))
-chapter2_3_position = chapter2_3.get_rect()
-chapter2_3_position.center = screen_width/2, screen_height/2
-
-chapter2_4 = pygame.image.load('assets/game_assets/chapter2_4.png')
-chapter2_4.convert_alpha()
-chapter2_4 = pygame.transform.smoothscale(chapter2_4,(screen_width, screen_height))
-chapter2_4_position = chapter2_4.get_rect()
-chapter2_4_position.center = screen_width/2, screen_height/2
-
-chapter3 = pygame.image.load('assets/game_assets/chapter3.png')
-chapter3.convert_alpha()
-chapter3 =pygame.transform.smoothscale(chapter3,(screen_width,screen_height))
-chapter3_position = chapter3.get_rect()
-chapter3_position.center = screen_width/2, screen_height/2
-        
-chapter4 = pygame.image.load('assets/game_assets/chapter4.png')
-chapter4.convert_alpha()
-chapter4 = pygame.transform.smoothscale(chapter4,(screen_width,screen_height))
-chapter4_position = chapter4.get_rect()
-chapter4_position.center = screen_width/2, screen_height/2
-
+chapter3, chapter3_position = load_scale_pos_center('assets/game_assets/chapter3.png', screen_width, screen_height, screen_width/2, screen_height/2)
+chapter4, chapter4_position = load_scale_pos_center('assets/game_assets/chapter4.png', screen_width, screen_height, screen_width/2, screen_height/2)
 
 
 #-------Image for Continue Button-------#
-button_image = pygame.image.load('assets/game_assets/button.png')
-button_image.convert_alpha()
-pygame.transform.smoothscale(button_image, (40,20))
-button_position = button_image.get_rect()
-button_position.center = screen_width / 2, screen_height * 0.8
+button_image, button_position = load_scale_pos_center('assets/game_assets/button.png', 180, 70, screen_width/2, screen_height * 0.8)
 
 #-------Images for Instructions-------#
+instructions1, instructions1_position = load_scale_pos_center('assets/game_assets/instructions1.png', screen_width, screen_height, screen_width/2, screen_height/2)
+instructions2, instructions2_position = load_scale_pos_center('assets/game_assets/instructions2.png', screen_width, screen_height, screen_width/2, screen_height/2)
+instructions3, instructions3_position = load_scale_pos_center('assets/game_assets/instructions3.png', screen_width, screen_height, screen_width/2, screen_height/2)
+instructions4, instructions4_position = load_scale_pos_center('assets/game_assets/instructions4.png', screen_width, screen_height, screen_width/2, screen_height/2)
 
-instructions1 = pygame.image.load('assets/game_assets/instructions1.png')
-instructions1.convert_alpha()
-pygame.transform.smoothscale(instructions1,(screen_width,screen_height))
-instructions1_position = instructions1.get_rect()
-instructions1_position.center = screen_width/2, screen_height/2
-
-instructions2 = pygame.image.load('assets/game_assets/instructions2.png')
-instructions2.convert_alpha()
-pygame.transform.smoothscale(instructions2,(screen_width,screen_height))
-instructions2_position = instructions2.get_rect()
-instructions2_position.center = screen_width/2, screen_height/2
-
-instructions3 = pygame.image.load('assets/game_assets/instructions3.png')
-instructions3.convert_alpha()
-pygame.transform.smoothscale(instructions3,(screen_width,screen_height))
-instructions3_position = instructions3.get_rect()
-instructions3_position.center = screen_width/2, screen_height/2
-        
-instructions4 = pygame.image.load('assets/game_assets/instructions4.png')
-instructions4.convert_alpha()
-pygame.transform.smoothscale(instructions4,(screen_width,screen_height))
-instructions4_position = instructions4.get_rect()
-instructions4_position.center = screen_width/2, screen_height/2
 
 #-------Images: Cover Photos------#
-trump_vs = pygame.image.load('assets/chapter1_media_war/trump_vs_hillary.jpg')
-trump_vs.convert()
-trump_vs = pygame.transform.smoothscale(trump_vs, (screen_width,screen_height))
-trump_vs_position = trump_vs.get_rect()
-
-rally = pygame.image.load('assets/chapter1_media_war/rally.jpeg')
-rally.convert()
+trump_vs, trump_vs_position = load_scale_getpos('assets/chapter1_media_war/trump_vs_hillary.jpg', screen_width, screen_height)
+rally, rally_position = load_scale_getpos('assets/chapter1_media_war/rally.jpeg', screen_width, screen_height)
 rally.set_alpha(200)
-rally = pygame.transform.smoothscale(rally, (screen_width,screen_height))
-rally_position = rally.get_rect()
+hillary_rally, hillary_rally_position = load_scale_getpos('assets/chapter1_media_war/hillary_rally.jpg', screen_width, screen_height)
 
-hillary_rally = pygame.image.load('assets/chapter1_media_war/hillary_rally.jpg')
-hillary_rally.convert()
-hillary_rally = pygame.transform.smoothscale(hillary_rally, (screen_width,screen_height))
-hillary_rally_position = hillary_rally.get_rect()
-
-media_war = pygame.image.load('assets/chapter3_fake_news/media_war.jpg')
-media_war.convert()
-media_war = pygame.transform.smoothscale(media_war,(screen_width,screen_height))                                       
-media_war_position = media_war.get_rect()
-media_war_position.center = screen_width/2, screen_height/2
+media_war, media_war_position = load_scale_getpos('assets/chapter3_fake_news/media_war.jpg', screen_width, screen_height)
 
 
-impeach = pygame.image.load('assets/chapter3_fake_news/impeach.jpg')
-impeach.convert()
-#impeach.set_alpha(200)
-impeach = pygame.transform.smoothscale(impeach,(screen_width,screen_height))
-impeach_position = impeach.get_rect()
-impeach_position.center = (screen_width/2, screen_height/2)
 
-
-trump_at_border_image = pygame.image.load('assets/chapter2_border/Pictures/trump_at_border.jpg')
-trump_at_border_image.convert()
+impeach, impeach_position = load_scale_pos_center('assets/chapter3_fake_news/impeach.jpg', screen_width, screen_height, screen_width/2, screen_height/2)
+trump_at_border_image, trump_at_border_position = load_scale_getpos('assets/chapter2_border/Pictures/trump_at_border.jpg', screen_width, screen_height)
 trump_at_border_image.set_alpha(200)
-trump_at_border_image = pygame.transform.smoothscale(trump_at_border_image, (screen_width, screen_height))
-trump_at_border_position = trump_at_border_image.get_rect()
-
-anger_image = pygame.image.load('assets/chapter2_border/Pictures/immigration_protest.jpg')
-anger_image.convert()
+anger_image = load_scale_getpos('assets/chapter2_border/Pictures/immigration_protest.jpg', screen_width, screen_height)[0]
 anger_image.set_alpha(200)
-anger_image = pygame.transform.smoothscale(anger_image, (screen_width, screen_height))
-
-security_image = pygame.image.load('assets/chapter2_border/Pictures/riot2.jpg')
-security_image.convert()
+security_image = load_scale_getpos('assets/chapter2_border/Pictures/riot2.jpg', screen_width, screen_height)[0]
 security_image.set_alpha(200)
-security_image = pygame.transform.smoothscale(security_image, (screen_width, screen_height))
-
-mexico_image = pygame.image.load('assets/chapter2_border/Pictures/mexico.jpg')
-mexico_image.convert()
+mexico_image = load_scale_getpos('assets/chapter2_border/Pictures/mexico.jpg', screen_width, screen_height)[0]
 mexico_image.set_alpha(200)
-mexico_image = pygame.transform.smoothscale(mexico_image, (screen_width, screen_height))
 
 
 trial = pygame.image.load('assets/chapter4_impeachment/trial2.jpg')
@@ -560,9 +497,11 @@ congress = pygame.transform.smoothscale(congress,(screen_width, screen_height))
 
 #-------Images: Chapter 1------#
 
-email_image = pygame.image.load('assets/chapter1_media_war/email.png')
-email_image.convert_alpha()
-email_image = pygame.transform.smoothscale(email_image,(100,100))
+email_image = load_and_scale('assets/chapter1_media_war/email.png', 100, 100)
+
+#email_image = pygame.image.load('assets/chapter1_media_war/email.png')
+#email_image.convert_alpha()
+#email_image = pygame.transform.smoothscale(email_image,(100,100))
 
 tweet_image = pygame.image.load('assets/chapter1_media_war/tweet.png')
 tweet_image.convert_alpha()
