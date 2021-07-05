@@ -994,11 +994,6 @@ while hillary_life > 0 and trump_life > 0:
     trump_life -= len(collide_list4) * tax_return_damage
     
     for tax_return in tax_returns_group:
-        '''
-        if trump1_position.colliderect(tax_return.rect) == True:
-            trump_life -= tax_return_damage
-            tax_returns.remove(tax_return)
-        '''
         if tax_return.rect.right < 0:
             tax_returns.remove(tax_return)
             tax_returns_group.remove(tax_return)
@@ -1038,12 +1033,9 @@ while hillary_life > 0 and trump_life > 0:
     screen.fill((255,255,255))
 
     if hillary_life <= 0:
-        #bookmark
         cheers_audio.play()
         break
-        #pygame.time.delay(cover_time2-fadeout_time)
-        #pygame.time.delay(fadeout_time)
-        
+
 
     if trump_life <= 0:
         screen.fill((255,255,255))
@@ -2234,19 +2226,5 @@ while True:
 
     pygame.display.flip()
     screen.fill((255,255,255))
-
-
-
-
-        
-
-
-        
-        
-        
-
-    
-    
-
 
 
