@@ -124,8 +124,6 @@ lockup_frequency_limit = 150
 cage_positionx = 200
 cage_positiony = screen_height - 200
 
-
-
 #----------Emergency---------#
 emergency_time_limit = 400
 emergency_frequency_limit = 450
@@ -770,11 +768,6 @@ ted_image.convert_alpha()
 
 
 
-
-
-
-
-
 emails = []
 tweets = [] 
 tax_returns = []
@@ -806,10 +799,6 @@ class Object(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image) ####creating a mask
     def move(self):
         self.rect = self.rect.move(self.speed)
-
-
-
-
 
 i = 0 
 trump_reload = 0
@@ -918,8 +907,6 @@ while hillary_life > 0 and trump_life > 0:
                         crooked_audio_charge = 0
                     z = 0
                     trump_reload = 0
-
-                    #crooked_position = trump_position.left+180, trump_position.top - 80
 
 
             if event.key == 13:
@@ -1045,13 +1032,6 @@ while hillary_life > 0 and trump_life > 0:
     hillary_life -= len(collide_list1) * tweet_damage
     
     for tweet in tweets_group:
-
-        '''
-        if hillary_position.colliderect(tweet.rect) == True:
-            hillary_life -= tweet_damage
-            tweets.remove(tweet)
-            tweets_group.remove(tweet)
-        '''
         if tweet.rect.left > screen_width:
             tweets.remove(tweet)
             tweets_group.remove(tweet)
@@ -1060,12 +1040,6 @@ while hillary_life > 0 and trump_life > 0:
     hillary_life -= len(collide_list2) * email_damage
     
     for email in emails_group:
-        '''
-        if hillary_position.colliderect(email.rect) == True:
-            hillary_life -= email_damage
-            emails.remove(email)
-            emails_group.remove(email)
-        '''
         if email.rect.left > screen_width:
             emails.remove(email)
             emails_group.remove(email)
@@ -1073,12 +1047,6 @@ while hillary_life > 0 and trump_life > 0:
     collide_list3 = pygame.sprite.spritecollide(trump1, audios_group, True, pygame.sprite.collide_mask)
     trump_life -= len(collide_list3) * audio_damage
     for audio in audios_group:
-        '''
-        if trump1_position.colliderect(audio.rect) == True:
-            trump_life -= audio_damage
-            audios.remove(audio)
-        '''
-            
         if audio.rect.right < 0:
             audios.remove(audio)
             audios_group.remove(audio)
@@ -1292,7 +1260,6 @@ for j in range(1,port_number+1):
     port_position = j * port_distance, border_position
     port = Port(port_image, port_position)
     ports.add(port)
-print(len(ports))
 
 
 border_line_position = border_line_image.get_rect()
@@ -1485,7 +1452,6 @@ while True:
     #Generating Immigrants
 
     if i % immigrant_frequency == immigrant_frequency -1:
-        #print('added')
 
         immigrant_position_init = random.randint(0,screen_width), 0
 
@@ -1535,27 +1501,8 @@ while True:
             truck.rect.right = screen_width - horizontal_displacement
 
         trucks.add(truck)
-    #print(len(immigrants))
-    #print(len(trucks))
-    #print(len(dealers))
-
-
-
         
     #----------Deploying chapter2_border Patrol----------#
-
-    '''
-
-    for event in pygame.event.get():
-        if event.type == pygame.KEYDOWN:
-            if event.key == 49:
-                print('predeployed')
-                if deploy_charge >= patrol_deploy_threshold:
-                    print('deployed')
-                    deploy_time = 0
-                    deploy_charge = 0
-    '''                   
-
     deploy_time += 1
     if deploy_time <= deploy_time_limit and deploy_time%deploy_frequency == deploy_frequency-1:
         patrol = Patrol(patrol_image, patrol_position, patrol_speed)
@@ -1569,13 +1516,6 @@ while True:
             patrol.speed = patrol_speed
 
     #----------Declaring National Emergency ---------#
-    '''
-    for event in pygame.event.get():
-        if event.type == pygame.KEYDOWN:
-            if event.key == 50:
-                anger += emergency_anger
-                emergency_time = 0
-    '''
     emergency_time += 1
 
 
@@ -1636,40 +1576,12 @@ while True:
         count += len(collide_list4) +len(collide_list5) + len(collide_list6)
         patrol.move()
         screen.blit(patrol.image, patrol.rect)
-        
-    '''
-    #----------Court Order Issued upon Increased Anger---------#
-    
-    activated_times = int(anger/court_order_frequency)
-    #anger_backup = anger - activated_times * court_order_frequency
-   
-    if activated_times > max(activated_list):
-        activated_list.append(activated_times)
-        court_order_status = 1
-        court_order_time = 0
-        lockup_time = lockup_time_limit +1
-
-        
-    court_order_time += 1
-    if court_order_time > court_order_time_limit:
-        court_order_status = 0
-    '''
 
 
     #----------Announcing Locking Up of Immigrants---------#
-    '''
-
-    for event in pygame.event.get():
-        if event.type == pygame.KEYDOWN:
-            if event.key == 51:
-                anger += lockup_anger
-                lockup_time = 0
-    '''
 
     lockup_time += 1
 
-
-    
     if lockup_time <= lockup_time_limit and court_order_status == 0: #Can't lock up people when court order is in effect
         
         screen.blit(cage_image, cage_position)
@@ -1791,16 +1703,11 @@ while True:
             patrols.remove(patrol)
             del patrol
 
-
     if court_order_status == 1:
         for immigrant in immigrants:
             immigrant.speed = [0,immigrant_speed_value]
         for dealer in dealers:
             dealer.speed = [0,dealer_speed]
-
-    #print(len(immigrants))
-    #print(len(trucks))
-    #print(len(dealers))
 
     #----------Fonts for Ratings---------#
     count_font = pygame.font.Font(None, 30)
@@ -1934,13 +1841,6 @@ while True:
         lockup_audio.stop()
         emergency_audio.stop()
         patrol_audio.stop()
-        
-        #screen.blit(mexico_image, (0,0))
-        #screen.blit(mexico_text, mexico_text_position)
-        #screen.blit(mexico1_text, mexico1_text_position)
-        #screen.blit(mexico2_text, mexico2_text_position)
-        #pygame.display.flip()
-        #pygame.time.delay(cover_time8)
         break
         
     pygame.display.flip()
@@ -2019,27 +1919,7 @@ while True:
     fakenews_audio_charge += 1
     if fakenews_audio_charge >= sound_frequency:
         fakenews_audio_charge = sound_frequency
-        
-    '''
-    if i == 0:
-        screen.blit(media_war,media_war_position)
-        screen.blit(chapter3_text, chapter3_text_position)
-        screen.blit(media_war_text,media_war_text_position)       
-        pygame.display.flip()
-        screen.fill((255,255,255))
-        pygame.time.delay(cover_time3)
-        
 
-        screen.blit(chapter3,chapter3_position)
-        pygame.display.flip()
-        pygame.time.delay(instruction_time)
-        screen.fill((255,255,255))
-        
-        screen.blit(instructions3,instructions3_position)
-        pygame.display.flip()
-        pygame.time.delay(instruction_time)
-        screen.fill((255,255,255))
-    '''
     
     screen.blit(trump_press1, trump_press1_position)
     i += 1
@@ -2121,8 +2001,6 @@ while True:
                 pass
             news_timeleft_dict_keys = list(news_timeleft_dict.keys())
 
-        #news_timeleft_dict_keys = news_timeleft_dict.keys()
-
     for icon_id in list(icons_timeleft_dict.keys()):
         
         if icons_timeleft_dict[icon_id] <= 0:
@@ -2153,35 +2031,13 @@ while True:
 
     if ratings <= 0:
         winning = 0
-        #screen.fill((255,255,255))
-
-        #screen.blit(impeach,impeach_position)
-        #screen.blit(lost_text, lost_text_position)
-        #screen.blit(lost2_text, lost2_text_position)
-        #pygame.display.flip()
-        
         impeached_audio.play()
 
-        #pygame.time.delay(cover_time4-fadeout_time)
-        #impeached_audio.fadeout(fadeout_time)
-        #pygame.time.delay(fadeout_time)
-                    
-
-        
         break
 
     if points == points_threshold:
         winning = 1
-        #screen.fill((255,255,255))
-        #screen.blit(impeach,impeach_position)
-        #screen.blit(won_text, won_text_position)
-        #screen.blit(won2_text, won2_text_position)
-        #pygame.display.flip()
         impeached_audio.play()
-        
-        #pygame.time.delay(cover_time4)
-        #impeached_audio.stop()
-        
         break
 
     pygame.display.flip()
@@ -2309,30 +2165,8 @@ while True:
         stop_audio_charge = sound_frequency
         
     i += 1
-    '''
-    if i <= 1:
-        screen.blit(trial,(0,0))
-        screen.blit(chapter4_text, chapter4_text_position)
-        screen.blit(media_war_text,media_war_text_position)
-        pygame.display.flip()
-        pygame.time.delay(cover_time5)
-        screen.fill((255,255,255))
-
-        screen.blit(chapter4,chapter4_position)
-        pygame.display.flip()
-        pygame.time.delay(instruction_time)
-        screen.fill((255,255,255))
-
-        screen.blit(instructions4,instructions4_position)
-        pygame.display.flip()
-        pygame.time.delay(instruction_time)
-        screen.fill((255,255,255))
-    '''
-    
-    
     screen.blit(congress,(0,0))
 
-    
     term_progress += term_speed
     trump_speed = [0,0]
 
@@ -2341,7 +2175,6 @@ while True:
             sys.exit()
 
         if event.type == pygame.KEYDOWN:
-            #print(event.key)
             if event.key == 97:
                 trump_speed = [-screen_width/6,0]
             if event.key == 100:
@@ -2374,9 +2207,7 @@ while True:
         
     for senator_id in list(senators_dict.keys()):
         senator = senators_dict[senator_id]
-        if senator.rect.top > screen_height and senator.speed[1] > 0:          
-            #if senator.image = nancy_image:
-                #impeachment_progress += 2
+        if senator.rect.top > screen_height and senator.speed[1] > 0:
             if senator.image == bernie_image:
                 impeachment_progress += 9
             if senator.image == chuck_image:
@@ -2421,14 +2252,11 @@ while True:
             if stop_audio_charge >= sound_frequency:
                 stop_audio.play()
                 stop_audio_charge = 0
-            
-            #senatorx.speed[0] = -senatorx.speed[0]
-            #senatorx.speed[1] = -senatorx.speed[1]
+
 
     term_years = int(term_progress/365)
     term_days = int(term_progress - term_years * 365)
        
-
 
     impeachment_progress_font = pygame.font.Font(None,40)
     impeachment_progress_text = impeachment_progress_font.render('chapter4_impeachment progress: '+str(impeachment_progress)+'%',True,(0,0,255))
